@@ -12,10 +12,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Only if we are an ipad....
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        // Lets take the rootViewController that the app gives us, and give that address to the split view controller.
         UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+        // Any UISplitViewController is just a container class that takes care of the child parent stuff, and has a viewControllers array property that must hold exactly 2 items, item[0] is the master and [1] is the detail.
+        //LastObject must me the detail controller. lets assign it to our navigationController we will use to navigate with.
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        // When the splitVC has a question or command, it will tell it to the navController's top viewController, which ever one that is.
         splitViewController.delegate = (id)navigationController.topViewController;
     }
     return YES;
@@ -47,5 +51,7 @@
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 @end

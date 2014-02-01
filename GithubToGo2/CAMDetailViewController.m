@@ -9,64 +9,34 @@
 #import "CAMDetailViewController.h"
 
 @interface CAMDetailViewController ()
-@property (strong, nonatomic) UIPopoverController *masterPopoverController;
-- (void)configureView;
+    // UIPopoverControllers are only for ipad. They temporarily dispay info, and grey out the background.
+    @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @end
 
 @implementation CAMDetailViewController
 
-#pragma mark - Managing the detail item
-
-- (void)setDetailItem:(id)newDetailItem
-{
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
-    }
-
-    if (self.masterPopoverController != nil) {
-        [self.masterPopoverController dismissPopoverAnimated:YES];
-    }        
-}
-
-- (void)configureView
-{
-    // Update the user interface for the detail item.
-
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
-    }
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Split view
-
-- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
-{
-    barButtonItem.title = NSLocalizedString(@"Master", @"Master");
-    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
-    self.masterPopoverController = popoverController;
+// These are implemented because we want are a <UISplitViewControllerDelegate>
+// This method tells the delegate that the specified view controller is about to be hidden. I think the only time that will happen is when turn the ipad to portrait.
+- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController{
+        // Set our title to "Master"
+        barButtonItem.title = NSLocalizedString(@"Menu", @"Menu");
+        // Seeing how the tableView is about to DISSAPEAR, lets create a button that slides it into view.
+        [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+        self.masterPopoverController = popoverController; // Lets hold on to it, for when we rotate back.
 }
 
-- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    // Called when the view is shown again in the split view, invalidating the button and popover controller.
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-    self.masterPopoverController = nil;
+// This method tells the delegate that the specified view controller is about to be DISPLAYED. I think the only time that will happen is when we turn the ipad to landscape.
+- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem{
+        // Called when the view is shown again in the split view, invalidating the button and popover controller.
+        // We dont need that button that says "Master" anymore, because Master will be in view now anyway.
+        [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+        self.masterPopoverController = nil; // We in landscape, we dont need popovers anymore.
 }
 
 @end
