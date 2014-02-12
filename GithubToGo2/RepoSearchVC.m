@@ -151,7 +151,7 @@
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    NSLog(@"count is %d" ,  [self.nSFetchedResultsController.sections[section] numberOfObjects] );
+//   NSLog(@"count is %d" ,  [self.nSFetchedResultsController.sections[section] numberOfObjects] );
     return [self.nSFetchedResultsController.sections[section] numberOfObjects] ;
 }
 

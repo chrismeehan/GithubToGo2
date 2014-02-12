@@ -69,10 +69,11 @@
     }
     // Then this is not an ipad
     else {
+        if(self.currentDetailVC != nil) {
+            [self hideContentController:self.currentDetailVC];
+            [self.currentDetailVC dismissViewControllerAnimated:NO completion:nil];
+        }
         if(indexPath.row == 0){ // Then we want git user view for iphoones.
-            if(self.gitUserController){ // Remove any old container, if we had one.
-                [self hideContentController:self.gitUserController];
-            }
             self.gitRepoController = [self.storyboard instantiateViewControllerWithIdentifier:@"RepoSearchVC"];
             //shadowing
             self.gitRepoController.view.layer.shadowOpacity = 0.7;
@@ -97,9 +98,6 @@
             [self.view addGestureRecognizer:self.uIPGR];
         }
         else if(indexPath.row == 1){ // Then we want git repos view for iphoones.
-            if(self.gitRepoController){ // Remove any old container, if we had one.
-                [self hideContentController:self.gitRepoController];
-            }
             self.gitUserController = [self.storyboard  instantiateViewControllerWithIdentifier:@"UserSearchVC"];
             //shadowing
             self.gitUserController.view.layer.shadowOpacity = 0.7;
