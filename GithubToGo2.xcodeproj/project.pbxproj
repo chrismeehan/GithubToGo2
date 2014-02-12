@@ -31,6 +31,8 @@
 		20C61E7018970B5600DB5964 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 20C61E6E18970B5600DB5964 /* InfoPlist.strings */; };
 		20C61E7218970B5600DB5964 /* GithubToGo2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 20C61E7118970B5600DB5964 /* GithubToGo2Tests.m */; };
 		20F483A718985A7F00DF190F /* CAMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F483A618985A7F00DF190F /* CAMMenuViewController.m */; };
+		20F58DEB18AA9A260098B6CB /* Github_To_Go.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20F58DE918AA9A260098B6CB /* Github_To_Go.xcdatamodeld */; };
+		20F58DEE18AAAD730098B6CB /* Repo.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F58DED18AAAD730098B6CB /* Repo.m */; };
 		20FA113C189BF9590005DE86 /* WebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FA113B189BF9590005DE86 /* WebController.m */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,9 @@
 		20C61E7118970B5600DB5964 /* GithubToGo2Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GithubToGo2Tests.m; sourceTree = "<group>"; };
 		20F483A518985A7F00DF190F /* CAMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMMenuViewController.h; sourceTree = "<group>"; };
 		20F483A618985A7F00DF190F /* CAMMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CAMMenuViewController.m; sourceTree = "<group>"; };
+		20F58DEA18AA9A260098B6CB /* Github_To_Go.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Github_To_Go.xcdatamodel; sourceTree = "<group>"; };
+		20F58DEC18AAAD730098B6CB /* Repo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Repo.h; sourceTree = "<group>"; };
+		20F58DED18AAAD730098B6CB /* Repo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Repo.m; sourceTree = "<group>"; };
 		20FA113A189BF9590005DE86 /* WebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebController.h; sourceTree = "<group>"; };
 		20FA113B189BF9590005DE86 /* WebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,6 +192,9 @@
 				20FA113B189BF9590005DE86 /* WebController.m */,
 				20C61E4F18970B5500DB5964 /* CAMAppDelegate.h */,
 				20C61E5018970B5500DB5964 /* CAMAppDelegate.m */,
+				20F58DE918AA9A260098B6CB /* Github_To_Go.xcdatamodeld */,
+				20F58DEC18AAAD730098B6CB /* Repo.h */,
+				20F58DED18AAAD730098B6CB /* Repo.m */,
 				20F483A518985A7F00DF190F /* CAMMenuViewController.h */,
 				20F483A618985A7F00DF190F /* CAMMenuViewController.m */,
 				20C61E5B18970B5600DB5964 /* CAMDetailViewController.h */,
@@ -334,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20F58DEE18AAAD730098B6CB /* Repo.m in Sources */,
 				20FA113C189BF9590005DE86 /* WebController.m in Sources */,
 				20C61E5118970B5500DB5964 /* CAMAppDelegate.m in Sources */,
 				20C230B7189B059500C285CA /* CustomCollectionViewCelliPad.m in Sources */,
@@ -341,6 +350,7 @@
 				20C2306B1899F57200C285CA /* GitUser.m in Sources */,
 				20C61E5D18970B5600DB5964 /* CAMDetailViewController.m in Sources */,
 				20F483A718985A7F00DF190F /* CAMMenuViewController.m in Sources */,
+				20F58DEB18AA9A260098B6CB /* Github_To_Go.xcdatamodeld in Sources */,
 				207EA2841898C1EC009D881F /* CustomCollectionViewCell.m in Sources */,
 				20C230BA189B2ADE00C285CA /* RepoSearchVC.m in Sources */,
 				207EA2791898B542009D881F /* UserSearchVC.m in Sources */,
@@ -575,6 +585,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		20F58DE918AA9A260098B6CB /* Github_To_Go.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				20F58DEA18AA9A260098B6CB /* Github_To_Go.xcdatamodel */,
+			);
+			currentVersion = 20F58DEA18AA9A260098B6CB /* Github_To_Go.xcdatamodel */;
+			path = Github_To_Go.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 20C61E3518970B5500DB5964 /* Project object */;
 }

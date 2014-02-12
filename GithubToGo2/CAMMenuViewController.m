@@ -133,6 +133,9 @@
     [content removeFromParentViewController];
 }
 
+
+
+
 -(void)userSlid:(UIPanGestureRecognizer*) uIPanGR{
     // If the user lifted his finger off the screen.
     if(uIPanGR.state == UIGestureRecognizerStateEnded){

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface RepoSearchVC : UIViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+@interface RepoSearchVC : UIViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate, NSFetchedResultsControllerDelegate>
+
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property(strong,nonatomic) NSFetchedResultsController* nSFetchedResultsController;
 
 @end
