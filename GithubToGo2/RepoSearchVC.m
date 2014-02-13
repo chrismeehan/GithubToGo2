@@ -79,7 +79,8 @@
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
     [searchBar resignFirstResponder]; // Get rid of the keyboard.
     NSArray* tempArrayOfRepos = [self downloadAllReposWithName:searchBar.text];
-    
+
+ 
     for (NSDictionary* dict in tempArrayOfRepos) {
         NSEntityDescription* repoDescription = [NSEntityDescription entityForName:@"Repo" inManagedObjectContext:self.managedObjectContext];
                                                 

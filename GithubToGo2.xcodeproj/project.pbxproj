@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		116DC72518AC3AE20078F45C /* MyRepoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 116DC72418AC3AE20078F45C /* MyRepoVC.m */; };
 		207EA26E1898B00C009D881F /* Github.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 207EA26D1898B00C009D881F /* Github.jpeg */; };
 		207EA2701898B17F009D881F /* UserIcon.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 207EA26F1898B17F009D881F /* UserIcon.jpeg */; };
 		207EA2791898B542009D881F /* UserSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 207EA2781898B542009D881F /* UserSearchVC.m */; };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		116DC72318AC3AE20078F45C /* MyRepoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRepoVC.h; sourceTree = "<group>"; };
+		116DC72418AC3AE20078F45C /* MyRepoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRepoVC.m; sourceTree = "<group>"; };
 		207EA26D1898B00C009D881F /* Github.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Github.jpeg; sourceTree = "<group>"; };
 		207EA26F1898B17F009D881F /* UserIcon.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = UserIcon.jpeg; sourceTree = "<group>"; };
 		207EA2771898B542009D881F /* UserSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSearchVC.h; sourceTree = "<group>"; };
@@ -201,6 +204,8 @@
 				20C61E5C18970B5600DB5964 /* CAMDetailViewController.m */,
 				20C230B8189B2ADE00C285CA /* RepoSearchVC.h */,
 				20C230B9189B2ADE00C285CA /* RepoSearchVC.m */,
+				116DC72318AC3AE20078F45C /* MyRepoVC.h */,
+				116DC72418AC3AE20078F45C /* MyRepoVC.m */,
 				207EA2771898B542009D881F /* UserSearchVC.h */,
 				207EA2781898B542009D881F /* UserSearchVC.m */,
 				20C2306C1899F5E200C285CA /* GitUser */,
@@ -350,6 +355,7 @@
 				20C2306B1899F57200C285CA /* GitUser.m in Sources */,
 				20C61E5D18970B5600DB5964 /* CAMDetailViewController.m in Sources */,
 				20F483A718985A7F00DF190F /* CAMMenuViewController.m in Sources */,
+				116DC72518AC3AE20078F45C /* MyRepoVC.m in Sources */,
 				20F58DEB18AA9A260098B6CB /* Github_To_Go.xcdatamodeld in Sources */,
 				207EA2841898C1EC009D881F /* CustomCollectionViewCell.m in Sources */,
 				20C230BA189B2ADE00C285CA /* RepoSearchVC.m in Sources */,

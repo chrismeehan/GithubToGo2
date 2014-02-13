@@ -155,6 +155,46 @@
 }
 
 
+-(BOOL) application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    NSLog(@"%@", url);
+
+    NSString *query = [url query];
+    NSArray *queryComponents = [query componentsSeparatedByString:@"="];
+    NSString *code = [queryComponents objectAtIndex:1];
+
+    NSLog(@"%@", code);
+
+    NSData *postData = [code dataUsingEncoding:NSASCIIStringEncoding];
+
+    NSMutableURLRequest *postRequest = [NSMutableURLRequest new];
+
+    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+
+    NSString *postURL = [NSString stringWithFormat:@"https://github.com/login/oauth/access_token?client_id=b57dca483196bdd4e791&client_secret=e2129a1f39e13f4a47250ec93ebedbc929338b8f&code=%@",code];
+
+    [postRequest setURL:[NSURL URLWithString:postURL]];
+    [postRequest setHTTPMethod:@"POST"];
+    [postRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [postRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [postRequest setHTTPBody:postData];
+
+    NSURLResponse *postResponse;
+    NSError *postError;
+
+    NSData *returnedPostData =  [NSURLConnection sendSynchronousRequest:postRequest returningResponse:&postResponse error:&postError];
+
+    NSString *tokenResponse = [[NSString alloc] initWithData:returnedPostData encoding:NSASCIIStringEncoding];
+
+    NSLog(@"%@", tokenResponse);
+
+    NSString *accessToken = [[tokenResponse componentsSeparatedByString:@"&"][0] componentsSeparatedByString:@"="][1];
+
+    NSLog(@"%@", accessToken);
+
+    [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"gittoken"];
+
+    return YES;
+}
 
 
 @end

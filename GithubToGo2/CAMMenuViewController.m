@@ -18,6 +18,7 @@
 @property(nonatomic) UserSearchVC* gitUserController;
 @property(nonatomic) UIPanGestureRecognizer *uIPGR;
 @property(nonatomic) UIViewController* currentDetailVC; // Whatever detail view is on screen.
+
 @end
 
 @implementation CAMMenuViewController
@@ -43,6 +44,11 @@
     self.uIPGR.maximumNumberOfTouches = 1;
     // This line connects the detailViewController property this class starts off with, with the real one in the storyboard.
     self.detailViewController = (CAMDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] != nil) {
+        _logInButton.enabled = NO;
+        _logInButton.title = @"Logged In";
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -65,6 +71,23 @@
             [self.detailViewController.view addSubview:self.gitUserController.view];
             [self.gitUserController.view setBackgroundColor:[UIColor redColor]];
             [self.gitUserController didMoveToParentViewController:self.detailViewController];
+        } else if(indexPath.row == 2) {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] == nil) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Not Logged In"
+                                                                message: @"You are not Logged In, Tap Login"
+                                                               delegate: nil
+                                                      cancelButtonTitle: @"OK"
+                                                      otherButtonTitles: nil];
+                [alert show];
+            } else  {
+                self.gitRepoController = [self.storyboard  instantiateViewControllerWithIdentifier:@"MyRepoSearchVCiPad"];
+                // Set our new controller's frame to match it's parent's (self).
+                self.gitRepoController.view.frame = CGRectMake(0 ,0, self.detailViewController.view.frame.size.width, self.detailViewController.view.frame.size.height);
+                [self.detailViewController addChildViewController:self.gitRepoController];
+                [self.detailViewController.view addSubview:self.gitRepoController.view];
+                [self.gitUserController.view setBackgroundColor:[UIColor blueColor]];
+                [self.gitRepoController didMoveToParentViewController:self.detailViewController];
+            }
         }
     }
     // Then this is not an ipad
@@ -120,6 +143,39 @@
             [self.gitUserController didMoveToParentViewController:self];
              self.currentDetailVC = self.gitUserController; // So we know what detail view is currently on screen.
             [self.view addGestureRecognizer:self.uIPGR];
+        } else if(indexPath.row == 2) {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] == nil) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Not Logged In"
+                                                                message: @"You are not Logged In, Tap Login"
+                                                               delegate: nil
+                                                      cancelButtonTitle: @"OK"
+                                                      otherButtonTitles: nil];
+                [alert show];
+            } else  {
+                self.gitRepoController = [self.storyboard instantiateViewControllerWithIdentifier:@"MyRepoSearchVCiPhone"];
+                //shadowing
+                self.gitRepoController.view.layer.shadowOpacity = 0.7;
+                self.gitRepoController.view.layer.shadowOffset = CGSizeMake(-17, 18);
+                self.gitRepoController.view.layer.cornerRadius = 2; // if you like rounded corners
+                self.gitRepoController.view.layer.shadowRadius = 7;
+                // Lets create it almost all the way offscreen to the right, then bring it back left 40 points.
+                self.gitRepoController.view.frame = CGRectMake(self.view.frame.size.width-40 ,0, self.view.frame.size.width-pageDoesntEntirelyCoverBy, self.view.frame.size.height);
+                // Then have it instantly slide left, covering up the master.
+                [UIView animateWithDuration:0.5 animations:^{
+                    CGRect frame = self.gitRepoController.view.frame;
+                    frame.origin.x = pageDoesntEntirelyCoverBy; // Push the left side off the left edge a bit.
+                    self.gitRepoController.view.frame = frame;
+                }
+                                 completion:^(BOOL finished){
+                                     // whatever you need to do when animations are complete
+                                 }];
+                [self addChildViewController:self.gitRepoController];
+                [self.view addSubview:self.gitRepoController.view];
+                [self.gitRepoController didMoveToParentViewController:self];
+                self.currentDetailVC = self.gitRepoController;// So we know what detail view is currently on screen.
+                [self.view addGestureRecognizer:self.uIPGR];
+
+            }
         }
     }
 }
@@ -161,5 +217,12 @@
 }
 
 
+-(IBAction)logInButtonTapped:(id)sender {
+
+    NSString *requestURL = @"https://github.com/login/oauth/authorize?client_id=b57dca483196bdd4e791&scope=user,repo";
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:requestURL]];
+
+}
 
 @end

@@ -19,4 +19,9 @@
 @property (strong, nonatomic) CAMDetailViewController *detailViewController;
 @property(strong,nonatomic)NSManagedObjectContext* managedObjectContext;
 @property(strong,nonatomic)NSFetchedResultsController* fetchResultsController;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logInButton;
+
+-(IBAction)logInButtonTapped:(id)sender;
+
 @end

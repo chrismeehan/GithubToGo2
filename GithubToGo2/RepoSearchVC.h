@@ -16,4 +16,5 @@
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property(strong,nonatomic) NSFetchedResultsController* nSFetchedResultsController;
 
+
 @end
