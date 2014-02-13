@@ -23,5 +23,6 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *logInButton;
 
 -(IBAction)logInButtonTapped:(id)sender;
+-(void)checkDisableLogInButton;
 
 @end

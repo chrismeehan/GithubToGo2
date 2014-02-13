@@ -44,11 +44,9 @@
     self.uIPGR.maximumNumberOfTouches = 1;
     // This line connects the detailViewController property this class starts off with, with the real one in the storyboard.
     self.detailViewController = (CAMDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] != nil) {
-        _logInButton.enabled = NO;
-        _logInButton.title = @"Logged In";
-    }
-
+	[self checkDisableLogInButton];
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:self selector:@selector(checkDisableLogInButton) name:@"tokenReceived" object:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -222,7 +220,15 @@
     NSString *requestURL = @"https://github.com/login/oauth/authorize?client_id=b57dca483196bdd4e791&scope=user,repo";
 
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:requestURL]];
+}
 
+-(void)checkDisableLogInButton
+{
+	if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] != nil)
+	{
+        _logInButton.enabled = NO;
+        _logInButton.title = @"Logged In";
+    }
 }
 
 @end
