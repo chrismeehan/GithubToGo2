@@ -15,7 +15,7 @@
     float pageDoesntEntirelyCoverBy; // This keeps any pages floating on top, slightly offset by this much so we can see behind it.
 }
 
-// We need a details class to show off the stuff of the cell that will get selected.
+// We need a details class to show off the stuff of the cell that will get selected.//
 @property (strong, nonatomic) CAMDetailViewController *detailViewController;
 @property(strong,nonatomic)NSManagedObjectContext* managedObjectContext;
 @property(strong,nonatomic)NSFetchedResultsController* fetchResultsController;
