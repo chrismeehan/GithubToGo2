@@ -69,15 +69,20 @@
             [self.detailViewController.view addSubview:self.gitUserController.view];
             [self.gitUserController.view setBackgroundColor:[UIColor redColor]];
             [self.gitUserController didMoveToParentViewController:self.detailViewController];
-        } else if(indexPath.row == 2) {
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] == nil) {
+        }
+		else if(indexPath.row == 2)
+		{
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] == nil)
+			{
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Not Logged In"
                                                                 message: @"You are not Logged In, Tap Login"
                                                                delegate: nil
                                                       cancelButtonTitle: @"OK"
                                                       otherButtonTitles: nil];
                 [alert show];
-            } else  {
+            }
+			else
+			{
                 self.gitRepoController = [self.storyboard  instantiateViewControllerWithIdentifier:@"MyRepoSearchVCiPad"];
                 // Set our new controller's frame to match it's parent's (self).
                 self.gitRepoController.view.frame = CGRectMake(0 ,0, self.detailViewController.view.frame.size.width, self.detailViewController.view.frame.size.height);
@@ -87,6 +92,10 @@
                 [self.gitRepoController didMoveToParentViewController:self.detailViewController];
             }
         }
+		else if (indexPath.row == 3)
+		{
+			
+		}
     }
     // Then this is not an ipad
     else {
@@ -141,7 +150,8 @@
             [self.gitUserController didMoveToParentViewController:self];
              self.currentDetailVC = self.gitUserController; // So we know what detail view is currently on screen.
             [self.view addGestureRecognizer:self.uIPGR];
-        } else if(indexPath.row == 2) {
+        }
+		else if(indexPath.row == 2) {
             if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] == nil) {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Not Logged In"
                                                                 message: @"You are not Logged In, Tap Login"
@@ -175,6 +185,23 @@
 
             }
         }
+		else if (indexPath.row == 3)
+		{
+			if ([[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"] == nil) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Not Logged In"
+                                                                message: @"You are not Logged In, Tap Login"
+                                                               delegate: nil
+                                                      cancelButtonTitle: @"OK"
+                                                      otherButtonTitles: nil];
+                [alert show];
+            }
+			else
+			{
+				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Enter Repo Name" message:nil delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"Create Repo", nil];
+				alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+				[alert show];
+			}
+		}
     }
 }
 
@@ -214,6 +241,39 @@
     }
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == 1)
+	{
+		NSString *repoName = [[alertView textFieldAtIndex:0] text];
+		NSDictionary *newRepo = [[NSDictionary alloc] initWithObjects:@[repoName] forKeys:@[@"name"]];
+		
+		NSData *jsonForRepo = [NSJSONSerialization dataWithJSONObject:newRepo
+														   options:NSJSONWritingPrettyPrinted
+															 error:nil];
+		
+		NSMutableURLRequest *postRequest = [NSMutableURLRequest new];
+		
+		NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[jsonForRepo length]];
+		
+		NSString *postURL = [NSString stringWithFormat:@"https://api.github.com/user/repos?access_token=%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"gittoken"]];
+		
+		[postRequest setURL:[NSURL URLWithString:postURL]];
+		[postRequest setHTTPMethod:@"POST"];
+		[postRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+		[postRequest setValue:@"text/plain" forHTTPHeaderField:@"Content-Type"];
+		[postRequest setHTTPBody:jsonForRepo];
+		
+		NSURLResponse *postResponse;
+		NSError *postError;
+		
+		NSData *returnedPostData =  [NSURLConnection sendSynchronousRequest:postRequest returningResponse:&postResponse error:&postError];
+		
+		NSString *repoResponse = [[NSString alloc] initWithData:returnedPostData encoding:NSASCIIStringEncoding];
+		
+		NSLog(@"%@", repoResponse);
+	}
+}
 
 -(IBAction)logInButtonTapped:(id)sender {
 

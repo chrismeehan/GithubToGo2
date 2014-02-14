@@ -11,7 +11,7 @@
 
 @class CAMDetailViewController;
 
-@interface CAMMenuViewController : UITableViewController<UIGestureRecognizerDelegate,NSFetchedResultsControllerDelegate>{
+@interface CAMMenuViewController : UITableViewController<UIGestureRecognizerDelegate,NSFetchedResultsControllerDelegate, UIAlertViewDelegate>{
     float pageDoesntEntirelyCoverBy; // This keeps any pages floating on top, slightly offset by this much so we can see behind it.
 }
 
