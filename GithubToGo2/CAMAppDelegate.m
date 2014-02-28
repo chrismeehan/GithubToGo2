@@ -7,6 +7,11 @@
 //
 
 #import "CAMAppDelegate.h"
+#import "CAMMenuViewController.h"
+
+@interface CAMAppDelegate()
+
+@end
 
 @implementation CAMAppDelegate
 
@@ -192,6 +197,8 @@
     NSLog(@"%@", accessToken);
 
     [[NSUserDefaults standardUserDefaults] setObject:accessToken forKey:@"gittoken"];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"tokenReceived" object:nil];
 
     return YES;
 }
